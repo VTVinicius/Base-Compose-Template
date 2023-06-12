@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import br.com.vtvinicius.base_feature.core.Scene
 import br.com.vtvinicius.base_feature.core.asSuccessOrNull
-import br.com.vtvinicius.base_feature.dialogs.CustomError
+
 import br.com.vtvinicius.base_feature.extensions.AppScaffold
 import br.com.vtvinicius.base_feature.extensions.validateStateError
 import br.com.vtvinicius.feature_example.cepScreen.components.TextSpace
@@ -44,13 +44,7 @@ fun CepScreen(
         content = {
             Column {
 
-                Scene(
-                    async = state.endereco,
-                ) {
-
-                }
-
-                CustomError(state.error, text = "Mensagem De Erro Pernsonalizada")
+                Scene(async = state.endereco, content = {}, error = {})
 
                 VerticalSpacer(height = 32)
 

@@ -37,11 +37,6 @@ fun AppScaffold(
     content: @Composable (PaddingValues) -> Unit,
     error: Throwable? = null,
 ) {
-
-    var showError by remember {
-        mutableStateOf(true)
-    }
-
     Scaffold(
         modifier = modifier,
         scaffoldState = scaffoldState,
@@ -62,53 +57,4 @@ fun AppScaffold(
         contentColor = contentColor,
         content = content,
     )
-
-    when (error) {
-        is DataSourceException -> {
-            ErrorDialog(
-                showError = showError,
-                error = "Ocorreu um erro ao processar os Dados",
-                onDismiss = {
-                    showError = false
-                }
-            )
-            println("br.com.vtvinicius.domain.exception.DataSourceException")
-        }
-        is ConnectException -> {
-            ErrorDialog(
-                showError = showError,
-                error = "Ocorreu um erro de conexão",
-                onDismiss = {
-                    showError = false
-
-                }
-            )
-            println("ConnectException")
-        }
-        is UnknownHostException -> {
-            ErrorDialog(
-                showError = showError,
-                error = "Ocorreu um erro de Internet",
-                onDismiss = {
-                    showError = false
-
-                }
-            )
-            println("UnknownHostException")
-        }
-        null -> {
-            println("Error null")
-            showError = true
-        }
-        else -> {
-            ErrorDialog(
-                showError = showError,
-                error = error?.message ?: "Ocorreu um erro",
-                onDismiss = {
-                    showError = false
-                }
-            )
-            println("Erro Generico")
-        }
-    }
 }
